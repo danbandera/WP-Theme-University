@@ -11,22 +11,22 @@
                 <p><a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('program'); ?>"><i class="fa fa-home" aria-hidden="true"></i> All Programs</a> <span class="metabox__main"><?php the_title(); ?></span></p>
             </div>
             <div class="generic-content">
-                <?php the_content(); ?>
+                <?php the_field('main_body_content'); ?>
             </div>
             <?php
 
             $relatedProfessors = new WP_Query(array(
-            'post_type'     => 'professor',
-            'posts_per_page'=>-1,
-            'orderby'       =>'title',
-            'order'         =>'ASC',
-            'meta_query'    => array(
-                array(
-                    'key'     =>'related_programs',
-                    'compare' => 'LIKE',
-                    'value'   => '"'.get_the_ID().'"',
+                'post_type'     => 'professor',
+                'posts_per_page'=>-1,
+                'orderby'       =>'title',
+                'order'         =>'ASC',
+                'meta_query'    => array(
+                    array(
+                        'key'     =>'related_programs',
+                        'compare' => 'LIKE',
+                        'value'   => '"'.get_the_ID().'"',
+                    )
                 )
-            )
             ));
             if ($relatedProfessors->have_posts()) {
                 echo '<hr class="section-break">';
@@ -48,24 +48,24 @@
 
             $today = date('Ymd');
             $homepageEvents = new WP_Query(array(
-            'post_type'     => array('event'),
-            'posts_per_page'=>2,
-            'meta_key'      =>'event_date',
-            'orderby'       =>'meta_value_num',
-            'order'         =>'ASC',
-            'meta_query'    => array(
-                array(
-                    'key'     =>'event_date',
-                    'compare' => '>=',
-                    'value'   => $today,
-                    'type'    => 'numeric'
-                ),
-                array(
-                    'key'     =>'related_programs',
-                    'compare' => 'LIKE',
-                    'value'   => '"'.get_the_ID().'"',
+                'post_type'     => array('event'),
+                'posts_per_page'=>2,
+                'meta_key'      =>'event_date',
+                'orderby'       =>'meta_value_num',
+                'order'         =>'ASC',
+                'meta_query'    => array(
+                    array(
+                        'key'     =>'event_date',
+                        'compare' => '>=',
+                        'value'   => $today,
+                        'type'    => 'numeric'
+                    ),
+                    array(
+                        'key'     =>'related_programs',
+                        'compare' => 'LIKE',
+                        'value'   => '"'.get_the_ID().'"',
+                    )
                 )
-            )
             ));
             if ($homepageEvents->have_posts()) {
                 echo '<hr class="section-break">';

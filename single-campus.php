@@ -24,16 +24,16 @@
             <?php
 
             $relatedPrograms = new WP_Query(array(
-            'post_type'     => 'program',
-            'orderby'       =>'title',
-            'order'         =>'ASC',
-            'meta_query'    => array(
-                array(
-                    'key'     =>'related_campus',
-                    'compare' => 'LIKE',
-                    'value'   => '"'.get_the_ID().'"',
+                'post_type'     => 'program',
+                'orderby'       =>'title',
+                'order'         =>'ASC',
+                'meta_query'    => array(
+                    array(
+                        'key'     =>'related_campus',
+                        'compare' => 'LIKE',
+                        'value'   => '"'.get_the_ID().'"',
+                    )
                 )
-            )
             ));
             if ($relatedPrograms->have_posts()) {
                 echo '<hr class="section-break">';
