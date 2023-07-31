@@ -13,6 +13,7 @@ function universitySearchResults($data) {
     $mainQuery = new WP_Query(array(
         'post_type' => array('post', 'page', 'professor', 'program', 'campus', 'event'),
         's' => sanitize_text_field($data['term']),
+        'posts_per_page' => -1
     ));
     $results = array(
         'generalInfo' => array(),
